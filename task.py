@@ -40,18 +40,35 @@ class Matrix:
 	def __str__(self):
 		return "{}".format(self.arr)
 
-	def add(self, matrix_2):
+	def add(self, matrix):
 		new_arr = []
 		for i in range( self.arr.__len__() ):
 			temp_arr = []
 			
 			for j in range( self.arr[0].__len__() ):
-				temp_arr.append( self.arr[i][j] + matrix_2.arr[i][j] )
+				temp_arr.append( self.arr[i][j] + matrix.arr[i][j] )
 			new_arr.append(temp_arr)
 
 		return new_arr
 
-		
+	def multiply(self, matrix):
+		new_arr = []
+
+		for i in range( self.arr.__len__() ):
+			temp_arr = []
+			
+			for j in range( self.arr[0].__len__() ):
+				temp_value = 0
+
+				for k in range(self.arr[0].__len__()):
+					temp_value += self.arr[i][j]*matrix.arr[j][i]
+
+				temp_arr.append(temp_value)
+
+			new_arr.append(temp_arr)
+
+		return new_arr
+
 
 def main():
 	matrix_1 = Matrix(4,5,6,7)
@@ -59,10 +76,12 @@ def main():
 	matrix_4 = Matrix(1,1,1,2,2,2,3,3,3)
 
 	matrix_3 = matrix_2.add(matrix_1)
+	matrix_5 = matrix_2.multiply(matrix_1)
 
 	print(matrix_1)
 	print(matrix_2)
 	print(matrix_3)
 	print(matrix_4)
+	print(matrix_5)
 if __name__ == "__main__":
 	main()
